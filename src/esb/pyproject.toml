@@ -148,6 +148,7 @@ exclude = [
     "node_modules",
     "venv",
     "*/migrations/*",
+    "esb/lib/gse/*",
 ]
 
 # Same as Black.
