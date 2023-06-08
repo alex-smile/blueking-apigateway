@@ -31,7 +31,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --upgrade 'setuptools<58.0.0' && \
+        pip install "setuptools<58.0"
+        pip3 install "setuptools<58.0"
         pip install ConcurrentLogHandler=="0.9.1"
       working-directory: src/esb
 
