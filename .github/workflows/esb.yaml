@@ -2,7 +2,7 @@ name: esb ci
 
 on:
   push:
-    branches: [ master, pre_*, ft_*, release/* ]
+    branches: [ master, pre_*, ft_*, release/*, test_esb_lint, ]
     paths: ['src/esb/**']
   pull_request:
     branches: [ master, pre_*, ft_*, release/* ]
