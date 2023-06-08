@@ -30,7 +30,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install "setuptools==58.0.0"
+        pip install "setuptools==57.5.0"
+        pip install docutils==0.18.1
         pip install ConcurrentLogHandler=="0.9.1"
       working-directory: src/esb
 
