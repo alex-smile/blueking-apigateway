@@ -99,11 +99,11 @@
     name: 跨域资源共享（CORS）
     name_en: Cross-Origin Resource Sharing (CORS)
     is_public: true
-    scope: stage_and_resource
     schema:
     - bk-cors
     - plugin
     - '0'
+    scope: stage_and_resource
 - model: plugin.pluginform
   fields:
     language: ''
@@ -336,11 +336,11 @@
     name: Header 转换
     name_en: Header transformation
     is_public: true
-    scope: stage_and_resource
     schema:
     - bk-header-rewrite
     - plugin
     - '0'
+    scope: stage_and_resource
 - model: plugin.pluginform
   fields:
     language: ''
@@ -638,11 +638,11 @@
     name: IP 访问保护
     name_en: IP restriction
     is_public: true
-    scope: stage_and_resource
     schema:
     - bk-ip-restriction
     - plugin
     - '0'
+    scope: stage_and_resource
 - model: plugin.pluginform
   fields:
     language: ''
@@ -779,6 +779,70 @@
       }
 - model: schema.schema
   fields:
+    created_time: 2023-10-12 14:54:21.010753+00:00
+    updated_time: 2023-10-12 14:54:21.010788+00:00
+    name: bk-mock
+    type: plugin
+    version: '0'
+    _schema: |-
+      {
+        "properties": {
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "error_response": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              },
+              "priority": {
+                "type": "integer",
+                "description": "priority of plugins by customized order"
+              },
+              "filter": {
+                "type": "array",
+                "description": "filter determines whether the plugin needs to be executed at runtime"
+              },
+              "disable": {
+                "type": "boolean"
+              }
+            }
+          },
+          "response_headers": {
+            "type": "object"
+          },
+          "response_status": {
+            "minimum": 100,
+            "type": "integer",
+            "default": 200
+          },
+          "response_example": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "$comment": "this is a mark for our injected plugin schema"
+      }
+    description: '-'
+    example: '-'
+- model: plugin.plugintype
+  fields:
+    code: bk-mock
+    name: mocking
+    name_en: mocking
+    is_public: false
+    schema:
+    - bk-mock
+    - plugin
+    - '0'
+    scope: resource
+- model: schema.schema
+  fields:
     created_time: 2023-04-26 14:54:21.010753+00:00
     updated_time: 2023-04-26 14:54:21.010753+00:00
     name: bk-rate-limit
@@ -842,11 +906,11 @@
     name: 频率控制
     name_en: Rate Limit
     is_public: true
-    scope: stage_and_resource
     schema:
     - bk-rate-limit
     - plugin
     - '0'
+    scope: stage_and_resource
 - model: plugin.pluginform
   fields:
     language: ''
@@ -1282,6 +1346,7 @@
     name_en: Gateway error using HTTP status code 200 (not recommended)
     is_public: false
     schema: null
+    scope: stage_and_resource
 - model: plugin.pluginform
   fields:
     language: ''
@@ -1372,3 +1437,4 @@
     - bk-verified-user-exempted-apps
     - plugin
     - '0'
+    scope: stage_and_resource
