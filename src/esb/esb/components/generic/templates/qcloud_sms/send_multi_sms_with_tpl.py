@@ -45,7 +45,7 @@ class SendMultiSmsWithTpl(Component, SetupConfMixin):
         def clean(self):
             data = self.cleaned_data
             nation_code = data["nation_code"] or configs.default_nation_code
-            new_data = {
+            return {
                 "tel": [{"nationcode": nation_code, "mobile": phone_number} for phone_number in data["phone_numbers"]],
                 "sign": data["sign"],
                 "tpl_id": data["tpl_id"],
@@ -53,7 +53,6 @@ class SendMultiSmsWithTpl(Component, SetupConfMixin):
                 "extend": data["extend"],
                 "ext": data["ext"],
             }
-            return new_data
 
     def handle(self):
         sdk_app_id = self.request.kwargs.get("sdk_app_id")

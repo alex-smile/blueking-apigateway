@@ -42,7 +42,7 @@ def check_custom_codename(request):
     }
 
     # register path
-    for current_folder, folders, files in os.walk(comp_config["path"]):
+    for current_folder, _folders, files in os.walk(comp_config["path"]):
         for filename in files:
             if filename.endswith(".py") and component_manager.should_register(current_folder, filename):
                 fpath = os.path.join(current_folder, filename)

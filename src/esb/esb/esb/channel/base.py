@@ -272,14 +272,12 @@ class BaseChannel(object):
         Called before request is handled by component,
         if it return a reponse dict, no more component will be called
         """
-        pass
 
     def after_handle_request(self):
         """
         Called after request has been handled by component,
         it may modify self.response object
         """
-        pass
 
     def _is_valid_jsonp_callback(self, jsonp_callback):
         if not jsonp_callback:
@@ -477,10 +475,7 @@ class BaseChannelManager(object):
             )
 
             # 支持的方法，默认支持GET、POST
-            if value.get("method"):
-                methods = method_delimiter.findall(value["method"])
-            else:
-                methods = ["GET", "POST"]
+            methods = method_delimiter.findall(value["method"]) if value.get("method") else ["GET", "POST"]
 
             for method in methods:
                 preset_channel = {

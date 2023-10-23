@@ -96,12 +96,10 @@ class ErrorCode(object):
 
 class BkErrorCodes(object):
     def __init__(self):
-        self._error_codes_dict = dict(
-            [
-                (code_name, ErrorCode(code_name, **error_code))
-                for code_name, error_code in list(bk_error_codes_conf.items())
-            ]
-        )
+        self._error_codes_dict = {
+            code_name: ErrorCode(code_name, **error_code)
+            for code_name, error_code in list(bk_error_codes_conf.items())
+        }
 
     def __getattr__(self, code_name):
         return self._error_codes_dict[code_name]

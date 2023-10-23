@@ -43,5 +43,5 @@ def update_function_controller():
             wlist = set()
             wlist.update(new_wlist)
             wlist.update(now_wlist)
-            obj.wlist = ",".join(sorted(list(wlist)))
+            obj.wlist = ",".join(sorted(wlist))
             obj.save()

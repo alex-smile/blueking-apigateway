@@ -46,5 +46,5 @@ class GetBatchUsers(Component):
 
         result = self.invoke_other("generic.v2.usermanage.list_users", kwargs=params)
         if result["result"]:
-            result["data"] = dict([(user["username"], user) for user in result["data"]])
+            result["data"] = {user["username"]: user for user in result["data"]}
         self.response.payload = result

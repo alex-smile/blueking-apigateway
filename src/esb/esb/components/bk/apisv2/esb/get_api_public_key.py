@@ -35,7 +35,7 @@ class GetApiPublicKey(Component):
         public_key = JWTKey().get_public_key()
 
         self.response.payload = {
-            "result": True if public_key else False,
+            "result": bool(public_key),
             "data": {
                 "public_key": public_key,
             },

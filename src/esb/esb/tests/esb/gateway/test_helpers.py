@@ -39,8 +39,7 @@ def test_is_from_gateway_with_jwt(mocker, meta, expected):
 class TestJWTClient:
     @pytest.fixture
     def mock_request(self, mocker):
-        request = mocker.MagicMock(META={})
-        return request
+        return mocker.MagicMock(META={})
 
     def test_init(self, mocker, mock_request, faker):
         bkapi_jwt = faker.pystr()

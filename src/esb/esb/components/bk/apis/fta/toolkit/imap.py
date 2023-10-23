@@ -102,10 +102,7 @@ class EMail(dict):
         self.criteria = criteria
 
         content_type = raw.get("Content-Type")
-        if content_type:
-            charset = raw.get_content_charset(self.charset)
-        else:
-            charset = self.charset
+        charset = raw.get_content_charset(self.charset) if content_type else self.charset
 
         self.update({k: self.decode(v, charset) for k, v in list(raw.items())})
         self.sender = self.get("From")
@@ -123,10 +120,7 @@ class EMail(dict):
 
 
 def contain_one(content, patterns):
-    for p in patterns:
-        if p in content:
-            return True
-    return False
+    return any(p in content for p in patterns)
 
 
 class MailPoller(object):
@@ -205,7 +199,7 @@ class MailPoller(object):
         return result_list
 
     def fetch_header(self, mails):
-        for mail in self.iter_fetch_chunks(mails=mails, criteria=self.CRITERIA_HEADER):
+        for _mail in self.iter_fetch_chunks(mails=mails, criteria=self.CRITERIA_HEADER):
             pass
 
     def fetch(self, mails, criteria=None):

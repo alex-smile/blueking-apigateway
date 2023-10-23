@@ -68,3 +68,4 @@ class APICommonMiddleware(object):
         if isinstance(exception, APIError):
             response = format_resp_dict(exception.code.as_dict())
             return JsonResponse(response, status=exception.code.status)
+        return None

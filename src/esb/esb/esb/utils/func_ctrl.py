@@ -58,10 +58,7 @@ class FunctionControllerClient(object):
         switch_status, wlist = FunctionControllerClient._get_func_ctrl_by_code(
             FunctionControllerCodeEnum.SKIP_USER_AUTH.value
         )
-        if switch_status and app_code in wlist:
-            return True
-        else:
-            return False
+        return bool(switch_status and app_code in wlist)
 
     @classmethod
     @cached(cache=TTLCache(maxsize=10, ttl=CacheTimeLevel.CACHE_TIME_SHORT.value))

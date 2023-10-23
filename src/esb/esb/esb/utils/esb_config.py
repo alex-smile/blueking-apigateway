@@ -46,7 +46,7 @@ class EsbConfigParser:
         """
         rewrite_channels = {}
         channel_groups = self.esb_config["channel_groups"]
-        for group_name in channel_groups.keys():
+        for group_name in channel_groups:
             rewrite_channels.update(channel_groups[group_name].get("rewrite_channels", {}))
         return rewrite_channels
 

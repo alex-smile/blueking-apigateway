@@ -39,10 +39,7 @@ def get_client_by_request(request, **kwargs):
     is_authenticated = request.user.is_authenticated
     if callable(is_authenticated):
         is_authenticated = is_authenticated()
-    if is_authenticated:
-        bk_token = request.COOKIES.get("bk_token", "")
-    else:
-        bk_token = ""
+    bk_token = request.COOKIES.get("bk_token", "") if is_authenticated else ""
 
     common_args = {
         "bk_token": bk_token,
@@ -63,10 +60,7 @@ def get_client_by_user(user, **kwargs):
         from django.contrib.auth.models import User
 
     try:
-        if isinstance(user, User):
-            username = user.username
-        else:
-            username = user
+        username = user.username if isinstance(user, User) else user
     except Exception:
         logger.exception("Failed to get user according to user (%s)" % user)
 

@@ -71,8 +71,6 @@ class FTAApiChannelForAPIS(ApiChannel):
 class Component(BaseComponent):
     """Component class"""
 
-    pass
-
 
 class SetupConfMixin(object):
     def setup_conf(self, conf):

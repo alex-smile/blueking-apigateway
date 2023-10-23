@@ -104,9 +104,7 @@ class ComponentClient(object):
             return self.component_name
 
         with translation.override("zh-hans"):
-            api_label = engines["jinja2"].from_string(api_label).render()
-
-        return api_label
+            return engines["jinja2"].from_string(api_label).render()
 
     def get_component_label_en(self):
         return getattr(self.component, "label_en", "")

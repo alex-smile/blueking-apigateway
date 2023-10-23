@@ -160,5 +160,3 @@ class GSECacheAPIClient(BaseGSEClient):
 
 class CommandDoesNotExist(Exception):
     """command not exist in thrift"""
-
-    pass

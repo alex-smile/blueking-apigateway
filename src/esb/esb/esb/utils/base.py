@@ -31,7 +31,7 @@ __all__ = ["is_py_file", "fpath_to_module", "SmartHost", "get_ssl_root_dir"]
 
 
 def is_py_file(fname):
-    return fname.endswith(".py") or fname.endswith(".pyc")
+    return fname.endswith((".py", ".pyc"))
 
 
 def fpath_to_module(fpath):

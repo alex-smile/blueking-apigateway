@@ -85,12 +85,11 @@ class ChangeCronStatus(Component):
 
         def clean(self):
             data = self.cleaned_data
-            params = {
+            return {
                 "appId": data["app_id"],
                 "status": data["status"],
                 "crontabTaskId": data["crontab_task_id"],
             }
-            return params
 
     def handle(self):
         data = self.form_data

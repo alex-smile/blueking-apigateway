@@ -152,7 +152,7 @@ def smart_unicode_v2(s, encoding=None):
             try:
                 import chardet
             except ImportError:
-                return
+                return None
         return chardet
 
     def guess_encoding(s):
@@ -258,6 +258,7 @@ def datetime_format(dt):
         return dt.strftime("%s %s" % (date_format, time_format))
     elif isinstance(dt, datetime.date):
         return dt.strftime(date_format)
+    return None
 
 
 def get_md5(src):

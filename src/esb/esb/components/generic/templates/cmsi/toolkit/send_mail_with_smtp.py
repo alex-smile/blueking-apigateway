@@ -50,10 +50,7 @@ class SMTPClient(object):
         mail_sender = kwargs["sender"]
         all_receiver = kwargs["receiver"] + kwargs["cc"]
 
-        if kwargs.get("mime_subtype"):
-            msg = MIMEMultipart(kwargs["mime_subtype"])
-        else:
-            msg = MIMEMultipart()
+        msg = MIMEMultipart(kwargs["mime_subtype"]) if kwargs.get("mime_subtype") else MIMEMultipart()
         msg["Subject"] = Header(smart_str(kwargs["title"]), "utf-8")
         msg["From"] = mail_sender
         msg["To"] = COMMASPACE.join(kwargs["receiver"])

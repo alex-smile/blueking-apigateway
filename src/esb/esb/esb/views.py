@@ -21,7 +21,7 @@ from common.django_utils import JsonResponse
 
 
 def handler_404_view(request):
-    resp = JsonResponse(
+    return JsonResponse(
         {
             "result": False,
             "data": None,
@@ -29,11 +29,10 @@ def handler_404_view(request):
         },
         status=404,
     )
-    return resp
 
 
 def handler_500_view(request):
-    resp = JsonResponse(
+    return JsonResponse(
         {
             "result": False,
             "data": None,
@@ -41,4 +40,3 @@ def handler_500_view(request):
         },
         status=500,
     )
-    return resp

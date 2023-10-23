@@ -170,7 +170,7 @@ class TranslationClient(object):
                 logger.warning(u"component has no 中文/英文 translation, file_path: %s", file_path)
 
             content = content.splitlines()
-            for index, line in enumerate(content):
+            for _index, line in enumerate(content):
                 line = line.strip()
                 if not line.startswith("|"):
                     continue
@@ -209,7 +209,7 @@ class TranslationClient(object):
                 logger.warning(u"component has no 中文/英文 translation, file_path: %s", file_path)
 
             content = content.splitlines()
-            for index, line in enumerate(content):
+            for _index, line in enumerate(content):
                 line = line.strip()
                 if not line.startswith("|"):
                     continue
@@ -289,7 +289,7 @@ class TranslationClient(object):
                 logger.warning(u"component has no 中文/英文 translation, file_path: %s", file_path)
 
             content = content.splitlines()
-            for index, line in enumerate(content):
+            for _index, line in enumerate(content):
                 line = line.strip()
                 if not line.startswith("|"):
                     continue
@@ -311,7 +311,7 @@ class TranslationClient(object):
         :Note: if include_files is not empty, filename should in it
         """
         file_list = []
-        for current_folder, folders, files in os.walk(path):
+        for current_folder, _folders, files in os.walk(path):
             for filename in files:
                 if (
                     not filename.endswith(".md")

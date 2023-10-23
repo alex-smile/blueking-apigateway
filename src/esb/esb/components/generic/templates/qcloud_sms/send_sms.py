@@ -44,14 +44,13 @@ class SendSms(Component, SetupConfMixin):
         def clean(self):
             data = self.cleaned_data
             nation_code = data["nation_code"] or configs.default_nation_code
-            new_data = {
+            return {
                 "tel": {"nationcode": nation_code, "mobile": data["phone_number"]},
                 "type": data["sms_type"] or 0,
                 "msg": data["content"],
                 "extend": data["extend"],
                 "ext": data["ext"],
             }
-            return new_data
 
     def handle(self):
         sdk_app_id = self.request.kwargs.get("sdk_app_id")

@@ -95,15 +95,11 @@ class HostNotFoundException(BaseException):
     组件的 host 未指定
     """
 
-    pass
-
 
 class RequestBlockedException(BaseException):
     """
     当前请求被屏蔽之后抛出的异常
     """
-
-    pass
 
 
 class APIError(BaseException):

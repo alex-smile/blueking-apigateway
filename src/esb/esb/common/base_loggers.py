@@ -31,20 +31,14 @@ class BasicRequestLogger:
 
     def write(self, request, response):
         # 记录原始的请求参数，而不是被修改过的kwargs
-        if "kwargs_copy" in request.g:
-            kwargs = request.g.kwargs_copy
-        else:
-            kwargs = request.g.kwargs
+        kwargs = request.g.kwargs_copy if "kwargs_copy" in request.g else request.g.kwargs
 
         if request.g.system_name == "CMSI" and request.g.component_alias_name == "send_mail":
             kwargs = copy.copy(kwargs)
             kwargs.pop("attachments", None)
 
         msecs_cost = (request.g.ts_request_end - request.g.ts_request_start) * 1000
-        if isinstance(response, dict):
-            message = response and response.get("message", "")
-        else:
-            message = ""
+        message = response and response.get("message", "") if isinstance(response, dict) else ""
 
         try:
             request_log = {

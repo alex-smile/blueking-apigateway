@@ -86,7 +86,7 @@ class ConfigForm(object):
 
     @classmethod
     def get_cleaned_data_when_exist(cls, data, keys=[]):
-        return dict([(key, data[key]) for key in keys if key in data])
+        return {key: data[key] for key in keys if key in data}
 
 
 class ConfapisManager(object):
@@ -120,17 +120,14 @@ class ConfapisManager(object):
 
         # RUN_MODE: optional value: dev, test, prod
         env = os.getenv("RUN_MODE")
-        if env:
-            env_system_apis_conf = self._get_system_config(system_name, env)
-        else:
-            env_system_apis_conf = []
+        env_system_apis_conf = self._get_system_config(system_name, env) if env else []
 
         if not env_system_apis_conf:
             self.apis_conf[system_name] = default_system_apis_conf
             return
 
         system_apis_conf = env_system_apis_conf
-        env_exist_apis_conf = dict([(_path, "") for _path, _ in env_system_apis_conf])
+        env_exist_apis_conf = {_path: "" for _path, _ in env_system_apis_conf}
         for _path, _config in default_system_apis_conf:
             # only check 1 times, to check duplicate in the next
             if _path in env_exist_apis_conf:

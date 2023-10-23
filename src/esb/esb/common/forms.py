@@ -37,7 +37,7 @@ def get_error_prompt(form):
     """
     content = []
     fields = list(form.fields.keys())
-    for k, v in sorted(list(form.errors.items()), key=lambda x: fields.index(x[0]) if x[0] in fields else -1):
+    for k, v in sorted(form.errors.items(), key=lambda x: fields.index(x[0]) if x[0] in fields else -1):
         _msg = force_text(v[0])
         b_field = form._safe_get_field(k)
         # Get the default error messages
@@ -127,15 +127,11 @@ class BaseComponentForm(forms.Form):
         """
         keys = keys or list(self.fields.keys())
         if isinstance(keys, dict):
-            return dict(
-                [
-                    (key_dst, self.cleaned_data[key_src])
-                    for key_src, key_dst in list(keys.items())
-                    if key_src in self.data
-                ]
-            )
+            return {
+                key_dst: self.cleaned_data[key_src] for key_src, key_dst in list(keys.items()) if key_src in self.data
+            }
         else:
-            return dict([(key, self.cleaned_data[key]) for key in keys if key in self.data])
+            return {key: self.cleaned_data[key] for key in keys if key in self.data}
 
 
 # Fields
@@ -225,5 +221,4 @@ class DefaultBooleanField(Field):
         if value in validators.EMPTY_VALUES:
             return self.default
 
-        value = str_bool(value)
-        return value
+        return str_bool(value)

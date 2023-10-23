@@ -320,7 +320,7 @@ class HttpClient(BasicHttpClient):
         if not isinstance(request_headers, dict):
             return {}
 
-        return dict([(key, request_headers[key]) for key in self.DEFAULT_HEADERS if key in request_headers])
+        return {key: request_headers[key] for key in self.DEFAULT_HEADERS if key in request_headers}
 
     def prepare_bk_header(self, headers={}, with_jwt_header=False):
         bkapi_headers = {}
@@ -507,10 +507,7 @@ class RequestHelperClient(BasicHttpClient):
         resp_status_code = -1
         result = None
         try:
-            if action:
-                resp = getattr(handler, action)(*args, **kwargs)
-            else:
-                resp = handler(*args, **kwargs)
+            resp = getattr(handler, action)(*args, **kwargs) if action else handler(*args, **kwargs)
         except Exception as e:
             logger.exception(
                 "%s error occured when request sys_name: %s, component_name: %s",

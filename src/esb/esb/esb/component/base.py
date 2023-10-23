@@ -198,13 +198,11 @@ class BaseComponent(object):
         """
         All Component should override this class
         """
-        pass
 
     def after_handle(self):
         """
         Do things after handle ended
         """
-        pass
 
     def get_host_by_env(self, hosts):
         """
@@ -308,8 +306,7 @@ class CompRequest(object):
 
     def get_strict_clean_params(self):
         params = copy.deepcopy(self.kwargs)
-        params = self._clean_normal_params(params)
-        return params
+        return self._clean_normal_params(params)
 
     def get_clean_params(self, ctype="form"):
         if not self.wsgi_request:
@@ -374,8 +371,7 @@ class ComponentsManager(object):
         self.name_component_map[comp_class.get_name().lower()] = comp_class
 
     def get_comp_by_name(self, name):
-        ret = self.name_component_map.get(name)
-        return ret
+        return self.name_component_map.get(name)
 
     def register_by_module(self, module, config={}):
         """
@@ -406,7 +402,7 @@ class ComponentsManager(object):
         Walk down components path to find all valid Component object
         """
         config = self.path_configs[path]
-        for current_folder, folders, files in os.walk(path):
+        for current_folder, _folders, files in os.walk(path):
             for filename in files:
                 if self.should_register(current_folder, filename):
                     fpath = os.path.join(current_folder, filename)
@@ -430,7 +426,7 @@ class ComponentsManager(object):
             return False
 
         # Components are not in toolkit folder
-        if file_folder.endswith("/toolkit") or file_folder.endswith("/apidoc") or file_folder.endswith("/__pycache__"):
+        if file_folder.endswith(("/toolkit", "/apidoc", "/__pycache__")):
             return False
         return is_py_file(filename) and not filename.startswith("_") and filename not in self.blist_comp_fnames
 
@@ -450,11 +446,10 @@ class ComponentsManager(object):
             try:
                 # Only if this Component class is **defined** in this module
                 if hasattr(obj, "handle") and issubclass(obj, BaseComponent) and obj.__module__ == module.__name__:
-                    cls_comp = obj
-                    return cls_comp
+                    return obj
             except Exception:
                 pass
-        return
+        return None
 
     def get_registed_components(self):
         return self.name_component_map

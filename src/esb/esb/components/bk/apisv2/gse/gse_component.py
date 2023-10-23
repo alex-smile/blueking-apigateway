@@ -74,7 +74,7 @@ class GseComponent(ConfComponent):
 
     def _format_legacy_response(self, response):
         return {
-            "result": True if response["bk_error_code"] == 0 else False,
+            "result": response["bk_error_code"] == 0,
             "code": response["bk_error_code"],
             "message": response.get("bk_error_msg", ""),
             "data": response.get("result"),

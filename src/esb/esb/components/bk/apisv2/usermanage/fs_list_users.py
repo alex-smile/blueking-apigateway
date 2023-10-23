@@ -103,4 +103,4 @@ class FsListUsers(Component, SetupConfMixin):
             }
         )
         categories_result = comp_obj.invoke()
-        return dict([(category["id"], category) for category in categories_result.get("data") or []])
+        return {category["id"]: category for category in categories_result.get("data") or []}

@@ -39,10 +39,7 @@ class JobComponent(ConfComponent):
             }
         )
 
-        if self.dest_http_method == "GET":
-            data = json.dumps(request_info["params"])
-        else:
-            data = request_info["data"]
+        data = json.dumps(request_info["params"]) if self.dest_http_method == "GET" else request_info["data"]
 
         self.response.payload = self.outgoing.http_client.post(
             host=self.host,

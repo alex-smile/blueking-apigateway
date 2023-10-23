@@ -154,9 +154,7 @@ class APIDoc(object):
         formated_document = re.sub(r"{{ *common_args_desc *}}", "", formated_document)
 
         # 去除文档中 apiMethod 和 apiLabel 的标记
-        formated_document = self._clear_api_flag(formated_document)
-
-        return formated_document
+        return self._clear_api_flag(formated_document)
 
     def _get_url_part(self):
         return self._format(API_PATH, {"api_path": self.api_path})
@@ -185,11 +183,10 @@ class APIDoc(object):
         return "\n".join(lines).strip()
 
     def _format_md_to_html(self, doc_md):
-        doc_html = markdown.markdown(
+        return markdown.markdown(
             doc_md,
             extensions=["tables", "attr_list", "fenced_code", "smarty", "codehilite", "toc"],
         )
-        return doc_html
 
     def _format(self, content, context):
         return self.jinja2_engine.from_string(content).render(context=context)

@@ -116,7 +116,7 @@ class GetCron(Component):
 
         def clean(self):
             data = self.cleaned_data
-            params = {
+            return {
                 "appId": data["app_id"],
                 "crontabTaskId": data["crontab_task_id"],
                 "name": data["name"],
@@ -132,7 +132,6 @@ class GetCron(Component):
                     data["last_modify_time_end"].strftime("%Y-%m-%d") if data["last_modify_time_end"] else ""
                 ),
             }
-            return params
 
     def handle(self):
         data = self.form_data
